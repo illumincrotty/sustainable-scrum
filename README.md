@@ -6,4 +6,4 @@ Our plan has three parts. The first is to develop a simple to understand, intera
 Each of our fields includes the study of resource efficiency and sustainability practices, especially physics and philosophy. We believe that our particular skill sets and qualifications make us the optimal choice for a project involving data analysis and representation of Denison’s resource usage and sustainability. If given this project, we will be equipped to utilize our experiences with sustainability analysis, remote data collection, and software design to create an elegant and interactive dashboard for Denison’s resource usage. We look forward to working with Denison to create a more sustainable Denison.
 
 
-[Past Data]{https://drive.google.com/open?id=1tjeOltkqWsxanUpeFyfXnU2SGYZioxik}
+[Past Data](https://drive.google.com/open?id=1tjeOltkqWsxanUpeFyfXnU2SGYZioxik)
