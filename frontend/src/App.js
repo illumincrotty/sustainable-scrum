@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+/*
 function App() {
   return (
     <div className="App">
@@ -12,11 +13,21 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn what set fire to the rain means
+          hi
         </a>
       </header>
     </div>
   );
+}*/
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        Welcome to Denison Sustainability Dashboard
+      </div>
+    );
+  }
 }
 
 export default App;
