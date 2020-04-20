@@ -20,7 +20,7 @@ code {
   border-color:#C8032B;
   font-size: 40px;
   height: 500px;
-  width: 1200px;
+  width: 100vw;
 }
 .header {
   font-family:'Lora';
@@ -28,7 +28,8 @@ code {
   color: white;
   background-color: #C8032B;
   height: 100px;
-  width: 1200px;
+  width: 100vw;
+  text-align: center;
 }
 .footer {
   font-family:"Lora";
@@ -43,5 +44,5 @@ code {
   border-color:#C8032B;
   font-size: 40px;
   height: 700px;
-  width: 1200px;
+  width: 100vw;
 }

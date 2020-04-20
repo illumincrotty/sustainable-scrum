@@ -11,7 +11,7 @@ function Title(){
 }
 function getRandomArray(numItems) {
   // Create random array of objects
-  let names = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let names = ['water', 'electric', 'gas', 'solar'];
   let data = [];
   for(var i = 0; i < numItems; i++) {
     data.push({
@@ -45,17 +45,17 @@ function getData() {
 
   data.push({
     title: 'Categories',
-    data: getRandomArray(20)
+    data: getRandomArray(4)
   });
 
   data.push({
     title: 'Categories',
-    data: getRandomArray(10)
+    data: getRandomArray(4)
   });
 
   data.push({
     title: 'Data 4',
-    data: getRandomArray(6)
+    data: getRandomArray(4)
   });
 
   return data;
@@ -71,17 +71,17 @@ function getFeeds() {
 
   feeds.push({
     title: 'Categories',
-    data: getRandomArray(20)
+    data: getRandomArray(4)
   });
 
   feeds.push({
     title: 'Categories',
-    data: getRandomArray(10)
+    data: getRandomArray(4)
   });
 
   feeds.push({
     title: 'Data 4',
-    data: getRandomArray(6)
+    data: getRandomArray(4)
   });
 
   return feeds;
@@ -206,12 +206,12 @@ class Dashboard extends React.Component {
       <LineChart
           data={this.state.feeds[0].data}
           title={this.state.feeds[0].title}
-          color="#3E517A"
+          color="#C8032B"
         />
       <BarChart className="Dashboard"
       data = {this.state.feeds[1].data}
       title = {this.state.feeds[1].title}
-      color="#70CAD1"
+      color="#C8032B"
       />
       </div>
     );
