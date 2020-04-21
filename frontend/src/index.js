@@ -1,8 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { Container, Header, List } from "semantic-ui-react";
 import * as serviceWorker from './serviceWorker';
 import Chart from "chart.js";
+import Example from "./Example";
+
+
+
+
 
 function Title(){
   return (
@@ -183,6 +189,22 @@ class LineChart extends React.Component {
     return <canvas ref={this.chartRef} />;
   }
 }
+/*
+class DropdownM extends React.Component{
+  render() {
+    return (
+      <Dropdown
+      placeholder="Select Building"
+      fluid
+      search
+      selection
+      options={countryOptions}
+      />
+    )
+  }
+}*/
+
+
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -242,11 +264,21 @@ function Footer() {
   );
 }
 
+
+const styleLink = document.createElement("link");
+styleLink.rel = "stylesheet";
+styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+document.head.appendChild(styleLink);
+
 class Page extends React.Component{
+
   render(){
     return(
       <div>
       <Title/>
+      <div>
+        <Example/>
+      </div>
       <Dashboard className="body2"/>
       <Footer/>
       </div>
