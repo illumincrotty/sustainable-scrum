@@ -12,7 +12,11 @@ import Example from "./Example";
 
 function Title(){
   return (
-    <div className="header"> Welcome to Denison Sustainability Dashboard! </div>
+    <div>
+    <div className="footer"></div>
+    <div className="header0"> DENISON </div>
+    <div className="header"> Welcome to the Denison Sustainability Dashboard! </div>
+    </div>
   );
 }
 function getRandomArray(numItems) {
@@ -224,13 +228,13 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div className="Dashboard">
-      <LineChart
+      <div className="dashboard" >
+      <LineChart className="part"
           data={this.state.feeds[0].data}
           title={this.state.feeds[0].title}
           color="#C8032B"
         />
-      <BarChart className="Dashboard"
+      <BarChart className="part"
       data = {this.state.feeds[1].data}
       title = {this.state.feeds[1].title}
       color="#C8032B"
@@ -276,8 +280,8 @@ class Page extends React.Component{
     return(
       <div>
       <Title/>
-      <div>
-        <Example/>
+      <div className="menus">
+        <Example  name="hii"/>
       </div>
       <Dashboard className="body2"/>
       <Footer/>
