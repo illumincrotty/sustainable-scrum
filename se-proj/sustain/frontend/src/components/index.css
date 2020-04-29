@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Roboto:ital,wght@1,100&display=swap');
+
+
+.body2 {
+  color: #C8032B;
+  border-style:solid;
+  border-width:2px;
+  border-color:#C8032B;
+  font-size: 40px;
+  height: 500px;
+  width: 70vw;
+  align:center;
+}
+.header0 {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+  background-color: #C8032B;
+  height: 125px;
+  width: 28vw;
+  margin:auto;
+}
+
+.insideH {
+  font-family:'Lora';
+  font-size:75px;
+  color: white;
+}
+.header {
+
+  height: 100px;
+  width: 100vw;
+  margin:auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.headertext {
+  font-family:'Lora';
+  font-size:30px;
+  color: black;
+}
+.footer {
+  background-color: #C8032B;
+  width: 100vw;
+  height: 8px;
+
+}
+.dashboard {
+  align-self: center;
+
+  font-size: 40px;
+  width: 70vw;
+  margin:auto;
+}
+.generate {
+  font-family:'Lora';
+  margin:auto;
+  text-align :center;
+}
+.part {
+  border-style:solid;
+  border-width:12px;
+  border-color:#C8032B;
+  width: 70vw;
+}
+.menus{
+  margin:auto;
+  padding: 3px 3px;
+  text-align: center;
+  align-self: center;
+  width:20vw;
+}
+.menu{
+  margin:auto;
+  padding: 3px 3px;
+  align-self: center;
+  width:20vw;
+}
+
+.button{
+  background-color: #C8032B; /* Green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: "Lora";
+  border-radius:8px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.buttonDiv{
+  text-align:center;
+}
+
+.separate{
+  height:100px;
+}
+
+.line{
+  options:{
+    title:{display:true}
+  }
+
+.backgroundImg {
+  width:100px;
+  height:70px;
+}
+
+}
