@@ -167,8 +167,11 @@ class LineChart extends React.Component {
   }
 
   componentDidUpdate() {
+    this.myChart.options.title.text = this.props.title;
+    this.myChart.options.scales.yAxes[0].scaleLabel.labelString = this.props.yaxis;
     this.myChart.data.labels = this.props.data.map(d => d.title);
     this.myChart.data.datasets[0].data = this.props.data.map(d => d.value);
+    this.myChart.data.datasets[0].label = this.props.label;
     this.myChart.update();
   }
 
@@ -179,12 +182,12 @@ class LineChart extends React.Component {
         scales: {
 
           yAxes: [
-            {
-              ticks: {
-                min: 0
-              }
-            }
-          ]
+            {scaleLabel:{display:true,
+              labelString:this.props.yaxis,
+          }
+        },
+          ],
+          xAxes:[{scaleLabel:{display:true,labelString:this.props.xaxis}}]
         },
         title:{display:true,
         text:this.props.title,
@@ -194,7 +197,7 @@ class LineChart extends React.Component {
       data: {
         labels: this.props.data.map(d => d.value),
         datasets: [{
-          label: this.props.title,
+          label: this.props.label,
           data: this.props.data.map(d => d.value),
           fill: 'none',
           backgroundColor: this.props.color,

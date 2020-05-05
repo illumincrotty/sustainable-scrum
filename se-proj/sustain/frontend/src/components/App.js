@@ -10,6 +10,7 @@ const builds = {
   "athletic":["Mitchell"],
 }
 
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 class Title extends Component{
   render(){
@@ -30,7 +31,7 @@ class App extends Component {
       data: [],
       loaded: false,
       placeholder: "Loading",
-      category: "all",
+      year: "2019",
     };
   }
 
@@ -45,6 +46,7 @@ class App extends Component {
         return response.json();
       })
       .then(data => {
+        /*
         data=data.sort((a,b)=>{return(a.year-b.year);});
         let dataApp1 = data.filter(z=>{return (z.util=="Water");});
         console.log(dataApp1);
@@ -57,10 +59,10 @@ class App extends Component {
         console.log(dataApp1);
 
 
-
+*/
         this.setState(() => {
           return {
-            data:dataApp1,
+            data:data,
             loaded: true
           };
         });
@@ -68,7 +70,7 @@ class App extends Component {
   }
 
 componentDidUpdate(prevP, prevS){
-  if (this.state.category != prevS.category){
+  if (this.state.year != prevS.year){
     fetch("api/getdata")
       .then(response => {
         if (response.status > 400) {
@@ -79,6 +81,7 @@ componentDidUpdate(prevP, prevS){
         return response.json();
       })
       .then(data => {
+        /*
         data=data.sort((a,b)=>{return(a.year-b.year);});
         if (this.state.category != "all"){
           data = data.filter(q=>{return(builds[this.state.category].includes(q.building));});
@@ -88,12 +91,12 @@ componentDidUpdate(prevP, prevS){
           let c = data.find(y=>{return(y.year==x.year && y.building==x.building && y.util=="Gas")});
             return {year:x.year, building:x.building, gas:c.meas, water:x.meas};
         });
-
+*/
 
 
         this.setState(() => {
           return {
-            data:dataApp1,
+            data:data,
             loaded: true
           };
         });
@@ -159,6 +162,8 @@ class App2 extends Component {
       loaded: false,
       placeholder: "Loading",
       util: "Water",
+      utilM:"1000 Gallons",
+      year: "2019",
     };
   }
 
@@ -176,6 +181,22 @@ class App2 extends Component {
       .then(data => {
         console.log("trying to load just water");
         console.log(data);
+
+
+
+
+
+
+
+        data = data.filter(x=>{
+          return(x.date.slice(0,4)==this.state.year);
+        })
+        data = data.map(x=>{
+          return{date:x.date.slice(5), util:x.util, meas:x.meas};
+        })
+        data = data.sort((a,b)=>{
+          return(months.indexOf(a.date)-months.indexOf(b.date));
+        })
         //data=data.sort((a,b)=>{return(a.year-b.year);});
       //  let data2 = data.filter(x=>{
         //    return (x.util==this.state.util);
@@ -192,7 +213,7 @@ class App2 extends Component {
 
   componentDidUpdate(p, p2) {
 
-    if (this.state.util != p2.util) {
+    if ((this.state.util != p2.util) || (this.state.year != p2.year)) {
     fetch("api/getdata/".concat(this.state.util))
       .then(response => {
         if (response.status > 400) {
@@ -203,7 +224,15 @@ class App2 extends Component {
         return response.json();
       })
       .then(data => {
-
+        data = data.filter(x=>{
+          return(x.date.slice(0,4)==this.state.year);
+        })
+        data = data.map(x=>{
+          return{date:x.date.slice(5), util:x.util, meas:x.meas};
+        })
+        data = data.sort((a,b)=>{
+          return(months.indexOf(a.date)-months.indexOf(b.date));
+        })
         this.setState(() => {
           return {
             data:data,
@@ -217,13 +246,60 @@ class App2 extends Component {
   render() {
     return (
       <div>
+      <div className="separate"></div>
+      <div className="buttonDiv">
+      <button className="button" onClick={()=>{
+        this.setState(()=>{return{year:"2008"};});
+
+      }}>2008</button>
+      <button className="button" onClick={()=>{
+        this.setState(()=>{return{year:"2009"};});
+      }}>2009</button>
+      <button className="button" onClick={()=>{
+        this.setState(()=>{return{year:"2010"};});
+      }}>2010</button>
+      <button className="button" onClick={()=>{
+        this.setState(()=>{return{year:"2011"};});
+      }}>2011</button>
+      <button className="button" onClick={()=>{
+        this.setState(()=>{return{year:"2012"};});
+      }}>2012</button>
+      <button className="button" onClick={()=>{
+        this.setState(()=>{return{year:"2013"};});
+      }}>2013</button>
+      <button className="button" onClick={()=>{
+        this.setState(()=>{return{year:"2014"};});
+      }}>2014</button>
+      <button className="button" onClick={()=>{
+        this.setState(()=>{return{year:"2015"};});
+      }}>2015</button>
+      <button className="button" onClick={()=>{
+        this.setState(()=>{return{year:"2016"};});
+      }}>2016</button>
+      <button className="button" onClick={()=>{
+        this.setState(()=>{return{year:"2017"};});
+      }}>2017</button>
+      <button className="button" onClick={()=>{
+        this.setState(()=>{return{year:"2018"};});
+      }}>2018</button>
+      <button className="button" onClick={()=>{
+        this.setState(()=>{return{year:"2019"};});
+      }}>2019</button>
+      <button className="button" onClick={()=>{
+        this.setState(()=>{return{year:"2020"};});
+      }}>2020</button>
+
+      </div>
       <div className="dashboard">
       <LineChart
           data={this.state.data.map(entry=>{
-              return({value: entry.meas, title: entry.year});
+              return({value: entry.meas, title: entry.date});
 
           }) }
-          title="Energy Use By Utility"
+          title={"Energy Use By Utility: ".concat(this.state.util, ", ", this.state.year)}
+          label={this.state.util}
+          xaxis="Month"
+          yaxis={this.state.utilM}
           color="#C8032B"
 
         />
@@ -231,17 +307,22 @@ class App2 extends Component {
         <div className="buttonDiv">
         <button className="button" onClick={()=>{
           console.log(this.state.util);
-          this.setState(()=>{return{util:"Water"};});
+          this.setState(()=>{return{util:"Water",utilM:"1000 Gallons"};});
           console.log(this.state.util);
 
         }}>Water</button>
         <button className="button" onClick={()=>{
           console.log(this.state.util);
-          this.setState(()=>{return{util:"Gas"};});
+          this.setState(()=>{return{util:"Gas", utilM:"CCF"};});
           console.log(this.state.util);
 
         }}>Gas</button>
-        <button className="button">Electric</button>
+        <button className="button" onClick={()=>{
+          console.log(this.state.util);
+          this.setState(()=>{return{util:"Electric",utilM:"KWH"};});
+          console.log(this.state.util);
+
+        }}>Electric</button>
         </div>
         <div className="separate"></div>
         </div>

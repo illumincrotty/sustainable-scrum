@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Sum, Max
-from .models import sus
-from .serializers import susSerializer
+from .models import *
+from .serializers import *
 from rest_framework import generics
 # Create your views here.
 
@@ -9,13 +9,17 @@ from rest_framework import generics
 
 
 class susListCreate(generics.ListCreateAPIView):
-    queryset = sus.objects.all()
-    serializer_class = susSerializer
+    queryset = All.objects.all()
+    serializer_class = AllSerializer
 
 class WaterListCreate(generics.ListCreateAPIView):
-    queryset = sus.objects.filter(util="Water").values('year').annotate(meas=Sum('meas'),building=Max('building'),util=Max('util')).order_by('year')
-    serializer_class = susSerializer
+    queryset = All.objects.filter(util="Water").values('date').annotate(meas=Sum('meas'), util=Max('util')).order_by('date')
+    serializer_class = AllSerializer
 
 class GasListCreate(generics.ListCreateAPIView):
-    queryset = sus.objects.filter(util="Gas").values('year').annotate(meas=Sum('meas'),building=Max('building'),util=Max('util')).order_by('year')
-    serializer_class = susSerializer
+    queryset = All.objects.filter(util="Gas").values('date').annotate(meas=Sum('meas'),util=Max('util')).order_by('date')
+    serializer_class = AllSerializer
+
+class ElecListCreate(generics.ListCreateAPIView):
+    queryset = All.objects.filter(util="Electric").values('date').annotate(meas=Sum('meas'),util=Max('util')).order_by('date')
+    serializer_class = AllSerializer

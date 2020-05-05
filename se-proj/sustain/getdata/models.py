@@ -7,3 +7,17 @@ class sus(models.Model):
     year = models.IntegerField()
     util = models.CharField(max_length = 50)
     meas = models.FloatField()
+
+
+class All(models.Model):
+    date = models.CharField(max_length=50)
+    util = models.CharField(max_length=50)
+    meas = models.IntegerField()
+
+class Building(models.Model):
+    building = models.CharField(max_length=50)
+    category = models.CharField(max_length=50)
+    date = models.CharField(max_length=50)
+    electric = models.IntegerField()
+    water = models.IntegerField()
+    gas = models.IntegerField()
