@@ -11,8 +11,9 @@ class sus(models.Model):
 
 class All(models.Model):
     date = models.CharField(max_length=50)
-    util = models.CharField(max_length=50)
-    meas = models.IntegerField()
+    elec = models.IntegerField()
+    water = models.IntegerField()
+    gas = models.IntegerField()
 
 class Building(models.Model):
     building = models.CharField(max_length=50)

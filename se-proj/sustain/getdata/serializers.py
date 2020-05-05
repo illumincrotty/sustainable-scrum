@@ -10,4 +10,4 @@ class susSerializer(serializers.ModelSerializer):
 class AllSerializer(serializers.ModelSerializer):
     class Meta:
         model = All
-        fields = ('date', 'util', 'meas')
+        fields = ('date', 'elec', 'water', 'gas')

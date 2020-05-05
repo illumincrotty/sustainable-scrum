@@ -17,7 +17,7 @@
     align-items: center;
   background-color: #C8032B;
   height: 125px;
-  width: 28vw;
+  width: 30vw;
   margin:auto;
 }
 
@@ -39,6 +39,26 @@
   font-family:'Lora';
   font-size:30px;
   color: black;
+}
+
+.header1{
+  font-family:'Lora';
+  font-size:20px;
+  color: black;
+  margin:auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer1{
+  font-family:'Lora';
+  font-size:14px;
+  color: black;
+  margin:auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .footer {
   background-color: #C8032B;
@@ -63,6 +83,15 @@
   border-width:12px;
   border-color:#C8032B;
   width: 70vw;
+}
+
+.graph{
+  background-color:#eceeee;
+  width:100vw;
+}
+
+.separate2{
+  height:50px;
 }
 .menus{
   margin:auto;

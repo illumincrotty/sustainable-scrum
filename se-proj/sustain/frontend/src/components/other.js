@@ -107,12 +107,15 @@ class BarChart extends React.Component {
   this.myChart = new Chart(this.chartRef.current, {
     type: 'bar',
     options: {
-      scales:{
-        yAxes:[
-          {ticks:{
-            min:0,
-          }}
-        ]
+      scales: {
+
+        yAxes: [
+          {scaleLabel:{display:true,
+            labelString:this.props.label,
+        }
+      },
+        ],
+        xAxes:[{scaleLabel:{display:true,labelString:"Month"}}]
       },
       title:{display:true,
       text:this.props.title,
@@ -139,6 +142,11 @@ class BarChart extends React.Component {
         label: "Water",
         data: this.props.data.map(d=>d.water),
         backgroundColor: "#C8032B",
+      },
+      {
+        label: "Electric",
+        data: this.props.data.map(d=>d.elec),
+        backgroundColor: "#EEA900",
       }
     ]
   }
@@ -148,8 +156,10 @@ class BarChart extends React.Component {
 
 componentDidUpdate(){
   this.myChart.data.labels = this.props.data.map(d => d.title);
+  this.myChart.options.title.text = this.props.title;
   this.myChart.data.datasets[0].data = this.props.data.map(d => d.gas);
   this.myChart.data.datasets[1].data = this.props.data.map(d => d.water);
+  this.myChart.data.datasets[2].data = this.props.data.map(d => d.elec);
   this.myChart.update();
 }
 render(){
@@ -201,9 +211,9 @@ class LineChart extends React.Component {
           data: this.props.data.map(d => d.value),
           fill: 'none',
           backgroundColor: this.props.color,
-          pointRadius: 2,
+          pointRadius: 3,
           borderColor: this.props.color,
-          borderWidth: 1,
+          borderWidth: 2,
           lineTension: 0
         }]
       }
