@@ -52,7 +52,7 @@ class Footer extends Component{
 
 
 //Component with Bar Chart
-class App extends Component {
+class Bar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -259,7 +259,7 @@ componentDidUpdate(prevP, prevS){
 
 
 //Line graph class
-class App2 extends Component {
+class Line extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -543,17 +543,17 @@ class App2 extends Component {
   }
 }
 
-export {App,App2, Title, Footer};
+export {Bar, Line, Title, Footer};
 
 //render in index.html
 const cont = document.getElementById("title");
 render(<Title />, cont);
 
 const container = document.getElementById("app");
-render(<App />, container);
+render(<Bar />, container);
 
 const container2 = document.getElementById("app2");
-render(<App2 />, container2);
+render(<Line />, container2);
 
 const container3 = document.getElementById("foot");
 render(<Footer/>, container3);
