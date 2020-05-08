@@ -3,7 +3,4 @@ from . import views
 
 urlpatterns = [
     path('api/getdata/', views.susListCreate.as_view() ),
-    path('api/getdata/Water', views.WaterListCreate.as_view() ),
-    path('api/getdata/Gas', views.GasListCreate.as_view() ),
-    path('api/getdata/Electric', views.ElecListCreate.as_view())
 ]

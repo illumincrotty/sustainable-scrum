@@ -1,101 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import './index.css';
-//import { Container, Header, List } from "semantic-ui-react";
-//import * as serviceWorker from './serviceWorker';
 import Chart from "chart.js";
-//import Example from "./Example";
 
 
-
-
-
-function Title(){
-  return (
-    <div>
-    <div className="footer"></div>
-    <div className="header0"> DENISON </div>
-    <div className="header"> Welcome to the Denison Sustainability Dashboard! </div>
-    </div>
-  );
-}
-function getRandomArray(numItems) {
-  // Create random array of objects
-  let names = ['water', 'electric', 'gas', 'solar'];
-  let data = [];
-  for(var i = 0; i < numItems; i++) {
-    data.push({
-      label: names[i],
-      value: Math.round(20 + 80 * Math.random())
-    });
-  }
-  return data;
-}
-
-function getRandomDateArray(numItems) {
-  // Create random array of objects (with date)
-  let data = [];
-  let baseTime = new Date('2018-05-01T00:00:00').getTime();
-  let dayMs = 24 * 60 * 60 * 1000;
-  for(var i = 0; i < numItems; i++) {
-    data.push({
-      time: new Date(baseTime + i * dayMs),
-      value: Math.round(20 + 80 * Math.random())
-    });
-  }
-  return data;
-}
-function getData() {
-  let data = [];
-
-  data.push({
-    title: 'Visits',
-    data: getRandomDateArray(150)
-  });
-
-  data.push({
-    title: 'Categories',
-    data: getRandomArray(4)
-  });
-
-  data.push({
-    title: 'Categories',
-    data: getRandomArray(4)
-  });
-
-  data.push({
-    title: 'Data 4',
-    data: getRandomArray(4)
-  });
-
-  return data;
-}
-
-function getFeeds() {
-  let feeds = [];
-
-  feeds.push({
-    title: 'Visits',
-    data: getRandomDateArray(150)
-  });
-
-  feeds.push({
-    title: 'Categories',
-    data: getRandomArray(4)
-  });
-
-  feeds.push({
-    title: 'Categories',
-    data: getRandomArray(4)
-  });
-
-  feeds.push({
-    title: 'Data 4',
-    data: getRandomArray(4)
-  });
-
-  return feeds;
-}
 
 class BarChart extends React.Component {
   constructor(props) {
@@ -104,69 +11,70 @@ class BarChart extends React.Component {
   }
 
   componentDidMount() {
-  this.myChart = new Chart(this.chartRef.current, {
-    type: 'bar',
-    options: {
-      scales: {
-
-        yAxes: [
-          {scaleLabel:{display:true,
-            labelString:this.props.label,
+    this.myChart = new Chart(this.chartRef.current, {
+      type: 'bar',
+      options: {
+        scales: {
+          yAxes: [{
+            scaleLabel:{
+              display:true,
+              labelString:this.props.label,
+            }
+          }],
+          xAxes:[{
+            scaleLabel:{
+              display:true,
+              labelString:"Month"
+            }
+          }]
+        },
+        title:{
+          display:true,
+          text:this.props.title,
+          fontSize:24,
+          fontFamily:"Lora",
         }
       },
-        ],
-        xAxes:[{scaleLabel:{display:true,labelString:"Month"}}]
-      },
-      title:{display:true,
-      text:this.props.title,
-    fontSize:24,
-  fontFamily:"Lora",}
-    },
-    /*data: {
-      labels: this.props.data.map(d => d.title),
-      datasets: [{
-        label: this.props.title,
-        data: this.props.data.map(d => d.value),
-        backgroundColor: this.props.color
-      }]
-  }*/
-  data:{
-    labels: this.props.data.map(d=>d.title),
-    datasets: [
-      {
-        label: "Gas",
-        data: this.props.data.map(d=>d.gas),
-        backgroundColor: "#405362",
-      },
-      {
-        label: "Water",
-        data: this.props.data.map(d=>d.water),
-        backgroundColor: "#C8032B",
-      },
-      {
-        label: "Electric",
-        data: this.props.data.map(d=>d.elec),
-        backgroundColor: "#EEA900",
+      data:{
+        labels: this.props.data.map(d=>d.title),
+        datasets: [
+          {
+            label: "Gas",
+            data: this.props.data.map(d=>d.gas),
+            backgroundColor: "#405362",
+          },
+          {
+            label: "Water",
+            data: this.props.data.map(d=>d.water),
+            backgroundColor: "#C8032B",
+          },
+          {
+            label: "Electric",
+            data: this.props.data.map(d=>d.elec),
+            backgroundColor: "#EEA900",
+          }
+        ]
       }
-    ]
+    });
+
+}
+
+  componentDidUpdate(){
+    //update data labels
+    this.myChart.data.labels = this.props.data.map(d => d.title);
+    //update title
+    this.myChart.options.title.text = this.props.title;
+    //update data
+    this.myChart.data.datasets[0].data = this.props.data.map(d => d.gas);
+    this.myChart.data.datasets[1].data = this.props.data.map(d => d.water);
+    this.myChart.data.datasets[2].data = this.props.data.map(d => d.elec);
+    this.myChart.update();
   }
-});
-
-}
-
-componentDidUpdate(){
-  this.myChart.data.labels = this.props.data.map(d => d.title);
-  this.myChart.options.title.text = this.props.title;
-  this.myChart.data.datasets[0].data = this.props.data.map(d => d.gas);
-  this.myChart.data.datasets[1].data = this.props.data.map(d => d.water);
-  this.myChart.data.datasets[2].data = this.props.data.map(d => d.elec);
-  this.myChart.update();
-}
-render(){
-  return (
-    <canvas ref={this.chartRef}/>
-  );
-}
+  render(){
+    return (
+      <canvas ref={this.chartRef}/>
+    );
+  }
 
 }
 
@@ -176,36 +84,33 @@ class LineChart extends React.Component {
     this.chartRef = React.createRef();
   }
 
-  componentDidUpdate() {
-    this.myChart.options.title.text = this.props.title;
-    this.myChart.options.scales.yAxes[0].scaleLabel.labelString = this.props.yaxis;
-    this.myChart.data.labels = this.props.data.map(d => d.title);
-    this.myChart.data.datasets[0].data = this.props.data.map(d => d.value);
-    this.myChart.data.datasets[0].label = this.props.label;
-    this.myChart.update();
-  }
-
   componentDidMount() {
     this.myChart = new Chart(this.chartRef.current, {
       type: 'line',
       options: {
         scales: {
-
-          yAxes: [
-            {scaleLabel:{display:true,
+          yAxes: [{
+            scaleLabel:{
+              display:true,
               labelString:this.props.yaxis,
-          }
+            }
+          }],
+          xAxes:[{
+            scaleLabel:{
+              display:true,
+              labelString:this.props.xaxis
+            }
+          }]
         },
-          ],
-          xAxes:[{scaleLabel:{display:true,labelString:this.props.xaxis}}]
-        },
-        title:{display:true,
-        text:this.props.title,
-        fontSize:24,
-      fontFamily:"Lora",}
+        title:{
+          display:true,
+          text:this.props.title,
+          fontSize:24,
+          fontFamily:"Lora",
+        }
       },
       data: {
-        labels: this.props.data.map(d => d.value),
+        labels: this.props.data.map(d => d.title),
         datasets: [{
           label: this.props.label,
           data: this.props.data.map(d => d.value),
@@ -219,112 +124,25 @@ class LineChart extends React.Component {
       }
     });
   }
+
+  componentDidUpdate() {
+    //update title
+    this.myChart.options.title.text = this.props.title;
+    //update label according to utility
+    this.myChart.options.scales.yAxes[0].scaleLabel.labelString = this.props.yaxis;
+    //update data labels
+    this.myChart.data.labels = this.props.data.map(d => d.title);
+    //update data
+    this.myChart.data.datasets[0].data = this.props.data.map(d => d.value);
+    //update label for legend
+    this.myChart.data.datasets[0].label = this.props.label;
+    this.myChart.update();
+  }
+
+
   render() {
     return <canvas ref={this.chartRef} />;
   }
 }
-/*
-class DropdownM extends React.Component{
-  render() {
-    return (
-      <Dropdown
-      placeholder="Select Building"
-      fluid
-      search
-      selection
-      options={countryOptions}
-      />
-    )
-  }
-}*/
-
-
-
-class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      feeds : getFeeds()
-    };
-  }
-
-  componentDidMount() {
-    window.setInterval(() => {
-      this.setState({
-        feeds: getFeeds()
-      })
-    }, 5000)
-  }
-
-  render() {
-    return (
-      <div className="dashboard" >
-      <LineChart className="part"
-          data={this.state.feeds[0].data}
-          title={this.state.feeds[0].title}
-          color="#C8032B"
-        />
-      <BarChart className="part"
-      data = {this.state.feeds[1].data}
-      title = {this.state.feeds[1].title}
-      color="#C8032B"
-      />
-      </div>
-    );
-  }
-}
-
-class Graph extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      months : 12,
-      water : true,
-      electric : false,
-      solar : false,
-
-    };
-  };
-  render() {
-    return(
-      <div className="body2">{[1,2,3]} </div>
-    );
-  }
-}
-
-function Footer() {
-  return (
-    <div className="footer"> For more information visit www.denison.edu/sustainability </div>
-  );
-}
-
 
 export { BarChart, LineChart};
-/*
-const styleLink = document.createElement("link");
-styleLink.rel = "stylesheet";
-styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
-document.head.appendChild(styleLink);
-
-class Page extends React.Component{
-
-  render(){
-    return(
-      <div>
-      <Title/>
-      <div className="menus">
-        <Example  name="hii"/>
-      </div>
-      <Dashboard className="body2"/>
-      <Footer/>
-      </div>
-    );
-  }
-}
-
-ReactDOM.render(<Page />, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();*/
